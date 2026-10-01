@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Magno Agner — Videomaker e Produtor Audiovisual em Belo Horizonte. Casamentos, eventos, imóveis, redes sociais e muito mais.">
+<meta property="og:title" content="Magno Agner — Videomaker">
+<meta property="og:description" content="Portfólio de produção audiovisual.">
+<title>Magno Agner — Videomaker</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0a0a;
+  --surface:#111111;
+  --surface2:#181818;
+  --gold:#b8965a;
+  --gold-light:#d4b07a;
+  --text:#e8e4dc;
+  --text-muted:#7a7570;
+  --text-dim:#3a3835;
+  --border:#1e1e1c;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-weight:300;font-size:15px;line-height:1.7;overflow-x:hidden}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1.4rem 3rem;transition:background .4s,border-color .4s;border-bottom:1px solid transparent}
+nav.scrolled{background:rgba(10,10,10,.96);border-color:var(--border);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:300;letter-spacing:.15em;color:var(--text);cursor:pointer;text-decoration:none}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{color:var(--text-muted);text-decoration:none;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;transition:color .3s}
+.nav-links a:hover{color:var(--gold)}
+
+/* ── HERO ── */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem;position:relative}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 60%,rgba(184,150,90,.055) 0%,transparent 70%);pointer-events:none}
+.hero-eyebrow{font-size:.68rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gold);margin-bottom:2.5rem;opacity:.9}
+.hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(4.5rem,11vw,10rem);font-weight:300;line-height:.95;letter-spacing:-.01em;color:var(--text);margin-bottom:2rem}
+.hero-name em{font-style:italic;color:var(--gold-light);display:block}
+.hero-sub{font-size:.88rem;color:var(--text-muted);letter-spacing:.04em;max-width:380px;line-height:2}
+.hero-scroll{margin-top:4rem;display:flex;flex-direction:column;align-items:center;gap:.8rem;color:var(--text-dim);font-size:.6rem;letter-spacing:.28em;text-transform:uppercase}
+.scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--gold),transparent)}
+
+/* ── SECTIONS ── */
+section{padding:5rem 3rem}
+.section-label{font-size:.62rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);margin-bottom:2.5rem;display:flex;align-items:center;gap:1rem}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── FILTER ── */
+.filter-bar{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.25rem}
+.filter-btn{background:transparent;border:1px solid var(--border);color:var(--text-muted);padding:.4rem 1rem;font-family:'Inter',sans-serif;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .25s;border-radius:1px}
+.filter-btn:hover{border-color:var(--gold);color:var(--gold)}
+.filter-btn.active{background:var(--gold);border-color:var(--gold);color:var(--bg);font-weight:500}
+.video-count{font-size:.75rem;color:var(--text-muted);margin-bottom:2rem}
+
+/* ── GRID ── */
+.video-grid{columns:3;gap:3px}
+.video-card{break-inside:avoid;margin-bottom:3px;position:relative;overflow:hidden;cursor:pointer;background:var(--surface)}
+.video-card iframe{width:100%;aspect-ratio:16/9;display:block;border:none;background:#000;pointer-events:none}
+.video-card-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.88) 0%,rgba(0,0,0,.08) 55%,transparent 100%);opacity:0;transition:opacity .35s;display:flex;flex-direction:column;justify-content:flex-end;padding:1.1rem}
+.video-card:hover .video-card-overlay{opacity:1}
+.play-ring{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) scale(.8);opacity:0;transition:all .3s;width:48px;height:48px;border:1px solid rgba(184,150,90,.75);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.video-card:hover .play-ring{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.play-tri{width:0;height:0;border-style:solid;border-width:8px 0 8px 15px;border-color:transparent transparent transparent var(--gold);margin-left:4px}
+.card-cat{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.25rem}
+.card-title{font-family:'Cormorant Garamond',serif;font-size:.95rem;color:var(--text);line-height:1.3;transform:translateY(6px);transition:transform .35s}
+.video-card:hover .card-title{transform:translateY(0)}
+
+/* ── MODAL ── */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.94);z-index:500;align-items:center;justify-content:center;padding:2rem}
+.modal-bg.open{display:flex}
+.modal-inner{width:100%;max-width:960px;position:relative}
+.modal-frame{width:100%;aspect-ratio:16/9;display:block;border:none;background:#000}
+.modal-bar{padding:1.1rem 0 .25rem;display:flex;justify-content:space-between;align-items:flex-start;gap:1rem}
+.modal-meta .modal-cat{font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.3rem}
+.modal-meta .modal-title{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:300;color:var(--text)}
+.modal-actions{display:flex;gap:.5rem;align-items:center;flex-shrink:0}
+.modal-nav-btn{background:transparent;border:1px solid var(--border);color:var(--text-muted);padding:.35rem .85rem;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .25s;font-family:'Inter',sans-serif}
+.modal-nav-btn:hover{border-color:var(--gold);color:var(--gold)}
+.modal-close{background:transparent;border:1px solid var(--border);color:var(--text-muted);width:36px;height:36px;cursor:pointer;font-size:1rem;transition:all .25s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.modal-close:hover{border-color:var(--gold);color:var(--gold)}
+.modal-drive-link{display:inline-flex;align-items:center;gap:.4rem;margin-top:.6rem;font-size:.65rem;letter-spacing:.1em;color:var(--text-muted);text-decoration:none;transition:color .25s}
+.modal-drive-link:hover{color:var(--gold)}
+
+/* ── ABOUT ── */
+.about{background:var(--bg)}
+.about-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:5rem;align-items:start}
+.about-text h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.8rem);font-weight:300;line-height:1.15;margin-bottom:1.75rem;color:var(--text)}
+.about-text h2 em{font-style:italic;color:var(--gold-light)}
+.about-text p{color:var(--text-muted);line-height:1.95;margin-bottom:1.2rem;font-size:.88rem}
+.stats{display:grid;gap:1.75rem}
+.stat{border-top:1px solid var(--border);padding-top:1.4rem}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:3.8rem;font-weight:300;color:var(--gold);line-height:1}
+.stat-l{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-top:.4rem}
+
+/* ── CONTACT ── */
+.contact{background:var(--surface);border-top:1px solid var(--border)}
+.contact h2{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.8rem);font-weight:300;line-height:1.1;margin-bottom:1.2rem;max-width:520px}
+.contact h2 em{font-style:italic;color:var(--gold-light)}
+.contact-sub{color:var(--text-muted);margin-bottom:3rem;font-size:.88rem;max-width:420px;line-height:1.9}
+.contact-list{display:flex;flex-direction:column;gap:1px;background:var(--border)}
+.contact-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg);padding:1.1rem 1.4rem;text-decoration:none;transition:background .25s;gap:1rem}
+.contact-item:hover{background:var(--surface2)}
+.contact-item-left{display:flex;flex-direction:column;gap:.2rem;min-width:0}
+.contact-platform{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.contact-handle{font-size:.92rem;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.contact-arrow{color:var(--text-dim);font-size:1rem;flex-shrink:0;transition:color .25s}
+.contact-item:hover .contact-arrow{color:var(--gold)}
+
+/* ── FOOTER ── */
+footer{padding:2.5rem 3rem;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.footer-copy{font-size:.72rem;color:var(--text-dim);letter-spacing:.04em}
+.footer-logo{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:300;letter-spacing:.18em;color:var(--text-dim)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:860px){
+  nav{padding:1.2rem 1.5rem}
+  .nav-links{gap:1.5rem}
+  section{padding:4rem 1.5rem}
+  .video-grid{columns:2}
+  .about-grid{grid-template-columns:1fr;gap:3rem}
+  .stats{grid-template-columns:repeat(3,1fr)}
+  footer{flex-direction:column;gap:1rem;text-align:center}
+}
+@media(max-width:540px){
+  .nav-links{display:none}
+  .video-grid{columns:1}
+  .stats{grid-template-columns:1fr}
+  .modal-bar{flex-direction:column;gap:.75rem}
+}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a class="nav-logo" href="#topo">MAGNO</a>
+  <ul class="nav-links">
+    <li><a href="#portfolio">Portfólio</a></li>
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="topo">
+  <div class="hero-eyebrow">Videomaker · Produção Audiovisual</div>
+  <h1 class="hero-name">Magno<em>Agner</em></h1>
+  <p class="hero-sub">Histórias contadas em movimento. Cada frame, uma intenção.</p>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span>portfólio</span>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio" style="background:var(--bg)">
+  <div class="section-label">Portfólio</div>
+  <div class="filter-bar" id="filterBar"></div>
+  <p class="video-count" id="videoCount"></p>
+  <div class="video-grid" id="videoGrid"></div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre" class="about">
+  <div class="section-label">Sobre</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <h2>Visão que <em>transforma</em> o ordinário</h2>
+      <p>Sou Magno Agner, videomaker apaixonado por contar histórias que ficam. Com experiência em produção audiovisual, levo cada projeto com a seriedade de quem sabe que imagem e som juntos criam algo que palavras sozinhas não alcançam.</p>
+      <p>Do roteiro à finalização, cuido de cada detalhe para que o resultado seja mais do que um vídeo — seja uma experiência. Casamentos, eventos corporativos, imóveis, redes sociais e muito mais.</p>
+      <p>Disponível para projetos em Belo Horizonte e região, além de produções em todo o Brasil.</p>
+    </div>
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-n">8</div>
+        <div class="stat-l">Vídeos no portfólio</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">5</div>
+        <div class="stat-l">Categorias de trabalho</div>
+      </div>
+      <div class="stat">
+        <div class="stat-n">100%</div>
+        <div class="stat-l">Dedicação em cada frame</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato" class="contact">
+  <div class="section-label">Contato</div>
+  <h2>Vamos criar algo <em>juntos</em></h2>
+  <p class="contact-sub">Entre em contato para orçamentos, parcerias ou para falar sobre o seu próximo projeto.</p>
+  <div class="contact-list">
+    <a class="contact-item" href="mailto:magnoagner@gmail.com">
+      <div class="contact-item-left">
+        <span class="contact-platform">Email principal</span>
+        <span class="contact-handle">magnoagner@gmail.com</span>
+      </div>
+      <span class="contact-arrow">→</span>
+    </a>
+    <a class="contact-item" href="mailto:agnermatias2@gmail.com">
+      <div class="contact-item-left">
+        <span class="contact-platform">Email comercial</span>
+        <span class="contact-handle">agnermatias2@gmail.com</span>
+      </div>
+      <span class="contact-arrow">→</span>
+    </a>
+    <a class="contact-item" href="https://wa.me/5531975098953" target="_blank" rel="noopener">
+      <div class="contact-item-left">
+        <span class="contact-platform">WhatsApp</span>
+        <span class="contact-handle">+55 (31) 9 7509-8953</span>
+      </div>
+      <span class="contact-arrow">→</span>
+    </a>
+    <a class="contact-item" href="https://instagram.com/magnoagner" target="_blank" rel="noopener">
+      <div class="contact-item-left">
+        <span class="contact-platform">Instagram</span>
+        <span class="contact-handle">@magnoagner</span>
+      </div>
+      <span class="contact-arrow">→</span>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2026 Magno Agner. Todos os direitos reservados.</span>
+  <span class="footer-logo">MAGNO</span>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modal" role="dialog" aria-modal="true" aria-label="Visualizar vídeo">
+  <div class="modal-inner">
+    <iframe class="modal-frame" id="modalFrame" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    <div class="modal-bar">
+      <div class="modal-meta">
+        <div class="modal-cat" id="modalCat"></div>
+        <div class="modal-title" id="modalTitle"></div>
+        <a class="modal-drive-link" id="modalDriveLink" target="_blank" rel="noopener">
+          ↗ abrir no Google Drive
+        </a>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-nav-btn" onclick="navModal(-1)" aria-label="Anterior">← ant.</button>
+        <button class="modal-nav-btn" onclick="navModal(1)" aria-label="Próximo">próx. →</button>
+        <button class="modal-close" onclick="closeModal()" aria-label="Fechar">✕</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// type: 'yt' = YouTube normal, 'yt-short' = YouTube Shorts
+const VIDEOS = [
+  {id:'WZvifL7EXzo',   title:'Chá Revelação — Ana Luiza',                      cat:'Chá Revelação', type:'yt'},
+  {id:'8NSf4gh1-YY',   title:'Renovação de Votos 10 Anos — Guilherme e Natalia',cat:'Ensaio Casal',  type:'yt'},
+  {id:'z2P-G99LHzU',   title:'Instituto Saliba — Institucional',                cat:'Institucional', type:'yt'},
+  {id:'Gc38n_0krnY',   title:'Aniversário do Noah',                             cat:'Aniversários',  type:'yt-short'},
+  {id:'LDgRZL107H0',   title:'Aniversário Davi e Theo',                        cat:'Aniversários',  type:'yt-short'},
+  {id:'1ih4L2jNV4g',   title:'Ana Luiza — Conteúdo',                           cat:'Redes Sociais', type:'yt-short'},
+  {id:'WYaIKhzyvkk',   title:'Ana Luiza — Conteúdo II',                        cat:'Redes Sociais', type:'yt-short'},
+  {id:'fbD_wOCgOZU',   title:'Ana Luiza — Conteúdo III',                       cat:'Redes Sociais', type:'yt-short'},
+];
+
+let currentFilter = 'Todos';
+let currentIdx = 0;
+let filtered = [...VIDEOS];
+
+/* build filter buttons */
+const cats = ['Todos', ...new Set(VIDEOS.map(v => v.cat))];
+const bar = document.getElementById('filterBar');
+cats.forEach(cat => {
+  const btn = document.createElement('button');
+  btn.className = 'filter-btn' + (cat === 'Todos' ? ' active' : '');
+  btn.textContent = cat;
+  btn.onclick = () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFilter = cat;
+    filtered = cat === 'Todos' ? [...VIDEOS] : VIDEOS.filter(v => v.cat === cat);
+    renderGrid();
+  };
+  bar.appendChild(btn);
+});
+
+function isShort(v) { return v.type === 'yt-short'; }
+
+function embedUrl(v, autoplay) {
+  if (v.type === 'yt' || v.type === 'yt-short') {
+    return `https://www.youtube.com/embed/${v.id}?rel=0${autoplay ? '&autoplay=1' : ''}`;
+  }
+  return `https://drive.google.com/file/d/${v.id}/preview${autoplay ? '&autoplay=1' : ''}`;
+}
+function watchUrl(v) {
+  if (v.type === 'yt') return `https://youtu.be/${v.id}`;
+  if (v.type === 'yt-short') return `https://youtube.com/shorts/${v.id}`;
+  return `https://drive.google.com/file/d/${v.id}/view`;
+}
+function thumbUrl(v) {
+  if (v.type === 'yt' || v.type === 'yt-short') return `https://img.youtube.com/vi/${v.id}/hqdefault.jpg`;
+  return null;
+}
+
+function renderGrid() {
+  const grid = document.getElementById('videoGrid');
+  const count = document.getElementById('videoCount');
+  count.textContent = `${filtered.length} vídeo${filtered.length !== 1 ? 's' : ''}`;
+  grid.innerHTML = '';
+  filtered.forEach((v, i) => {
+    const card = document.createElement('div');
+    card.className = 'video-card';
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `Abrir: ${v.title}`);
+    const thumb = thumbUrl(v);
+    // Shorts ficam em coluna mais estreita com proporção 9/16
+    const ratio = isShort(v) ? '9/16' : '16/9';
+    const inner = thumb
+      ? `<img src="${thumb}" alt="${v.title}" loading="lazy" style="width:100%;aspect-ratio:${ratio};display:block;object-fit:cover;background:#000">`
+      : `<iframe src="${embedUrl(v, false)}" loading="lazy" allow="autoplay" title="${v.title}" style="width:100%;aspect-ratio:${ratio};display:block;border:none;background:#000;pointer-events:none"></iframe>`;
+    const badge = isShort(v) ? `<span style="position:absolute;top:.6rem;right:.6rem;background:rgba(0,0,0,.7);color:#b8965a;font-size:.55rem;letter-spacing:.12em;padding:.2rem .5rem;text-transform:uppercase;border:1px solid rgba(184,150,90,.3)">Short</span>` : '';
+    card.innerHTML = `
+      ${inner}
+      ${badge}
+      <div class="video-card-overlay">
+        <div class="play-ring"><div class="play-tri"></div></div>
+        <div class="card-cat">${v.cat}</div>
+        <div class="card-title">${v.title}</div>
+      </div>
+    `;
+    card.addEventListener('click', () => openModal(i));
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') openModal(i); });
+    grid.appendChild(card);
+  });
+}
+
+function openModal(idx) {
+  currentIdx = idx;
+  const v = filtered[idx];
+  const frame = document.getElementById('modalFrame');
+  frame.src = embedUrl(v, true);
+  // Shorts: proporção vertical, largura limitada para não distorcer
+  if (isShort(v)) {
+    frame.style.aspectRatio = '9/16';
+    frame.style.maxWidth = '360px';
+    frame.style.margin = '0 auto';
+    frame.style.display = 'block';
+  } else {
+    frame.style.aspectRatio = '16/9';
+    frame.style.maxWidth = '';
+    frame.style.margin = '';
+    frame.style.display = 'block';
+  }
+  document.getElementById('modalTitle').textContent = v.title;
+  document.getElementById('modalCat').textContent = v.cat;
+  const link = document.getElementById('modalDriveLink');
+  link.href = watchUrl(v);
+  link.textContent = (v.type === 'yt' || v.type === 'yt-short') ? '↗ abrir no YouTube' : '↗ abrir no Google Drive';
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal').classList.remove('open');
+  document.getElementById('modalFrame').src = '';
+  document.body.style.overflow = '';
+}
+
+function navModal(dir) {
+  openModal((currentIdx + dir + filtered.length) % filtered.length);
+}
+
+document.getElementById('modal').addEventListener('click', e => {
+  if (e.target === document.getElementById('modal')) closeModal();
+});
+
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('modal').classList.contains('open')) return;
+  if (e.key === 'Escape') closeModal();
+  if (e.key === 'ArrowRight') navModal(1);
+  if (e.key === 'ArrowLeft') navModal(-1);
+});
+
+window.addEventListener('scroll', () => {
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 50);
+}, { passive: true });
+
+renderGrid();
+</script>
+</body>
+</html>
